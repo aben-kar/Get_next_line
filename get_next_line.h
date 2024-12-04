@@ -6,7 +6,9 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
-#define BUFFER_SIZE 1024
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 2855
+#endif
 
 char *ft_strjoin(char *s1, char *s2);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
