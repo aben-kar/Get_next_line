@@ -1,65 +1,72 @@
 #include "get_next_line.h"
 
-char *get_next_line(int fd) {
-    static char *remainder = NULL;
-    char buffer[BUFFER_SIZE + 1];
+char *get_next_line(int fd)
+{
+    static char *rem = NULL;
+    char buffer[BUFFER_SIZE];
     char *line;
-    ssize_t bytes_read;
+    size_t byte;
+    char *tmp;
+    int i;
 
     if (fd < 0 || BUFFER_SIZE <= 0)
-        return NULL;
-    while ((bytes_read = read(fd, buffer, BUFFER_SIZE)) > 0) {
-        buffer[bytes_read] = '\0';
-        char *temp = ft_strjoin(remainder, buffer);
-        if (!temp)
+        return (NULL);
+    // byte = read(fd, buffer, BUFFER_SIZE);
+    while ((byte = read(fd, buffer, BUFFER_SIZE)) > 0)
+    {
+        if (byte < 0)
+            return(NULL);
+        buffer[byte] = '\0';
+        tmp = ft_strjoin(rem, buffer);
+        if (!tmp)
         {
-            free(remainder);
-            return NULL;
+            free(rem);
+            return (NULL);
         }
-        remainder = temp;
-        if (ft_strchr(remainder, '\n'))
+        free(rem);
+        rem = tmp;
+        int i = 0;
+        if (rem[i] && rem[i] == '\n')
             break;
     }
 
-    if (!remainder || *remainder == '\0') {
-        free(remainder);
-        remainder = NULL;
+    if (byte < 0 || (!rem && byte == 0))
         return NULL;
+
+    i = 0;
+    while (rem[i] && rem[i] != '\n')
+        i++;
+    line = malloc(i + 2);
+    if (!line)
+    {
+        free(rem);
+        return (NULL);
     }
 
-    char *newline_pos = ft_strchr(remainder, '\n');
-    if (newline_pos)
+    i = 0;
+    while (rem[i] && rem[i] != '\n')
     {
-        line = ft_substr(remainder, 0, newline_pos - remainder + 1);
-        if (!line)
-        {
-            free(remainder);
-            return NULL;
-        }
-        char *new_remainder = ft_strdup(newline_pos + 1);
-        if (!new_remainder)
-        {
-            free(remainder);
-            free(line);
-            return NULL;
-        }
-        free(remainder);
-        remainder = new_remainder;
+        line[i] = rem[i];
+        i++;
     }
-    else
+
+    if (rem[i] == '\n')
     {
-        line = ft_strdup(remainder);
-        free(remainder);
-        remainder = NULL;
-        if (!line)
-            return NULL;
+        line[i] = '\n';
+        i++;
+    }
+    line[i] = '\0';
+
+    tmp = ft_strdup(rem + i);
+    free(rem);
+    rem = tmp;
+    if (!rem || !*rem)
+    {
+        free(rem);
+        rem = NULL;
     }
     return line;
 }
-
-#include <fcntl.h>
-
-
 int main()
 {
     int fd;
@@ -73,6 +80,5 @@ int main()
         printf("%s", line);
         free(line);
     }
-
     close(fd);
 }

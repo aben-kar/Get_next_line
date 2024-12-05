@@ -84,49 +84,6 @@ char	*ft_strdup(const char *s1)
 	ft_memcpy(ptr, s1, len);
 	return (ptr);
 }
-
-char	*ft_substr(char const *s, unsigned int start, size_t len)
-{
-	size_t	len_s;
-	char	*dest;
-	size_t	i;
-
-	if (!s)
-		return (NULL);
-	len_s = ft_strlen(s);
-	if (start >= len_s)
-		return (ft_strdup(""));
-	if (start + len > len_s)
-		len = len_s - start;
-	dest = (char *)malloc((len + 1) * sizeof(char));
-	if (dest == NULL)
-		return (NULL);
-	i = 0;
-	while (s[start + i] && i < len)
-	{
-		dest[i] = s[start + i];
-		i++;
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-
-char	*ft_strchr(const char *str, int c)
-{
-	if (!str)
-		return (NULL);
-	while (*str)
-	{
-		if ((char)c == *str)
-			return ((char *)str);
-		str++;
-	}
-	if ((char)c == '\0')
-		return ((char *)str);
-	return (NULL);
-}
-
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -136,3 +93,79 @@ size_t	ft_strlen(const char *s)
 		i++;
 	return (i);
 }
+
+// char	*ft_substr(char const *s, unsigned int start, size_t len)
+// {
+// 	size_t	len_s;
+// 	char	*dest;
+// 	size_t	i;
+
+// 	if (!s)
+// 		return (NULL);
+// 	len_s = ft_strlen(s);
+// 	if (start >= len_s)
+// 		return (ft_strdup(""));
+// 	if (start + len > len_s)
+// 		len = len_s - start;
+// 	dest = (char *)malloc((len + 1) * sizeof(char));
+// 	if (dest == NULL)
+// 		return (NULL);
+// 	i = 0;
+// 	while (s[start + i] && i < len)
+// 	{
+// 		dest[i] = s[start + i];
+// 		i++;
+// 	}
+// 	dest[i] = '\0';
+// 	return (dest);
+// }
+
+
+// char	*ft_strchr(const char *str, int c)
+// {
+// 	if (!str)
+// 		return (NULL);
+// 	while (*str)
+// 	{
+// 		if ((char)c == *str)
+// 			return ((char *)str);
+// 		str++;
+// 	}
+// 	if ((char)c == '\0')
+// 		return ((char *)str);
+// 	return (NULL);
+// }
+
+
+// char *merged(const char *s , int c , int mode)//si 1 for strchr , 0 strdup 
+// {
+// 	if(mode == 0)
+// 	{
+// 		//strchr
+// 			if (!s)
+// 		return (NULL);
+// 	while (*s)
+// 	{
+// 		if ((char)c == *s)
+// 			return ((char *)s);
+// 		s++;
+// 	}
+// 	if ((char)c == '\0')
+// 		return ((char *)s);
+// 	return (NULL);
+// 	}else
+// 	{
+// 		//strdup 
+// 	size_t	len;
+// 	char	*ptr;
+
+// 	if (!s)
+// 		return (NULL);
+// 	len = ft_strlen(s);
+// 	ptr = (char *)ft_calloc((len + 1), sizeof(char));
+// 	if (ptr == NULL)
+// 		return (NULL);
+// 	ft_memcpy(ptr, s, len);
+// 	return (ptr);
+// 	}
+// }
