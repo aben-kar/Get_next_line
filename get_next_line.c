@@ -3,7 +3,7 @@
 char *get_next_line(int fd)
 {
     static char *rem = NULL;
-    char buffer[BUFFER_SIZE];
+    char buffer[BUFFER_SIZE + 1];
     char *line;
     size_t byte;
     char *tmp;
@@ -11,11 +11,9 @@ char *get_next_line(int fd)
 
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    // byte = read(fd, buffer, BUFFER_SIZE);
+    
     while ((byte = read(fd, buffer, BUFFER_SIZE)) > 0)
     {
-        if (byte < 0)
-            return(NULL);
         buffer[byte] = '\0';
         tmp = ft_strjoin(rem, buffer);
         if (!tmp)
@@ -25,17 +23,18 @@ char *get_next_line(int fd)
         }
         free(rem);
         rem = tmp;
-        int i = 0;
-        if (rem[i] && rem[i] == '\n')
+
+        if (ft_strchr(rem, '\n'))
             break;
     }
 
-    if (byte < 0 || (!rem && byte == 0)) // endena error f read || male9a maye9ra f dak l file (EOF).
+    if (byte < 0 || (!rem && byte == 0))
         return NULL;
 
     i = 0;
     while (rem[i] && rem[i] != '\n')
         i++;
+
     line = malloc(i + 2);
     if (!line)
     {
@@ -46,7 +45,7 @@ char *get_next_line(int fd)
     i = 0;
     while (rem[i] && rem[i] != '\n')
     {
-        line[i] = rem[i];
+        line[i] = rem[i];double-free
         i++;
     }
 
@@ -57,22 +56,26 @@ char *get_next_line(int fd)
     }
     line[i] = '\0';
 
-    tmp = ft_strdup(rem + i); //update rem bach readiw line jaya
+    tmp = ft_strdup(rem + i);
     free(rem);
     rem = tmp;
+
     if (!rem || !*rem)
     {
         free(rem);
         rem = NULL;
     }
+
     return line;
 }
+
+
 int main()
 {
     int fd;
     char *line; 
 
-    fd = open("test.txt", O_CREAT | O_RDWR, 0644);
+    fd = open("get.txt", O_CREAT | O_RDWR, 0644);
     while (1) {
         line = get_next_line(fd);
         if (!line)

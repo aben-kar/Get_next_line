@@ -121,20 +121,20 @@ size_t	ft_strlen(const char *s)
 // }
 
 
-// char	*ft_strchr(const char *str, int c)
-// {
-// 	if (!str)
-// 		return (NULL);
-// 	while (*str)
-// 	{
-// 		if ((char)c == *str)
-// 			return ((char *)str);
-// 		str++;
-// 	}
-// 	if ((char)c == '\0')
-// 		return ((char *)str);
-// 	return (NULL);
-// }
+char	*ft_strchr(const char *str, int c)
+{
+	if (!str)
+		return (NULL);
+	while (*str)
+	{
+		if ((char)c == *str)
+			return ((char *)str);
+		str++;
+	}
+	if ((char)c == '\0')
+		return ((char *)str);
+	return (NULL);
+}
 
 
 // char *merged(const char *s , int c , int mode)//si 1 for strchr , 0 strdup 

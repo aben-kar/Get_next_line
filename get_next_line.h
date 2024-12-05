@@ -7,7 +7,7 @@
 #include <fcntl.h>
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 2
+#define BUFFER_SIZE 1
 #endif
 
 char *ft_strjoin(char *s1, char *s2);
