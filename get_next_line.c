@@ -30,7 +30,7 @@ char *get_next_line(int fd)
             break;
     }
 
-    if (byte < 0 || (!rem && byte == 0))
+    if (byte < 0 || (!rem && byte == 0)) // endena error f read || male9a maye9ra f dak l file (EOF).
         return NULL;
 
     i = 0;
@@ -57,7 +57,7 @@ char *get_next_line(int fd)
     }
     line[i] = '\0';
 
-    tmp = ft_strdup(rem + i);
+    tmp = ft_strdup(rem + i); //update rem bach readiw line jaya
     free(rem);
     rem = tmp;
     if (!rem || !*rem)
