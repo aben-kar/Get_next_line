@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:36:07 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/06 15:39:57 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/06 20:28:25 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char *read_and_store(int fd, char *rem, char *buffer)
             break;
         byte = read(fd, buffer, BUFFER_SIZE);
     }
-    if (byte < 0 || (!rem && byte == 0)) //Ila kan read EOF w rem khawi, return NULL.
+    if (byte < 0 || (!rem && byte == 0))
         return NULL;
     return (rem);
 }
@@ -83,7 +83,7 @@ char *get_next_line(int fd)
     char buffer[BUFFER_SIZE + 1];
     char *line;
 
-    if (fd < 0 || BUFFER_SIZE <= 0)
+    if (fd < 0 || BUFFER_SIZE < 0)
         return (NULL);
 
     rem = read_and_store(fd, rem, buffer);
@@ -100,9 +100,9 @@ char *get_next_line(int fd)
 int main()
 {
     int fd;
-    char *line; 
+    char *line;
 
-    fd = open("get.txt", O_CREAT | O_RDWR, 0644);
+    fd = open("test.txt", O_CREAT | O_RDWR, 0644);
     while (1) {
         line = get_next_line(fd);
         if (!line)
