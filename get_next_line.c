@@ -2,7 +2,7 @@
 
 char *get_next_line(int fd)
 {
-    static char *rem = NULL;
+    static char *rem;
     char buffer[BUFFER_SIZE + 1];
     char *line;
     size_t byte;
@@ -11,8 +11,8 @@ char *get_next_line(int fd)
 
     if (fd < 0 || BUFFER_SIZE <= 0)
         return (NULL);
-    
-    while ((byte = read(fd, buffer, BUFFER_SIZE)) > 0)
+    byte = read(fd, buffer, BUFFER_SIZE);
+    while (byte > 0)
     {
         buffer[byte] = '\0';
         tmp = ft_strjoin(rem, buffer);
@@ -21,11 +21,11 @@ char *get_next_line(int fd)
             free(rem);
             return (NULL);
         }
-        free(rem);
         rem = tmp;
 
         if (ft_strchr(rem, '\n'))
             break;
+        byte = read(fd, buffer, BUFFER_SIZE);
     }
 
     if (byte < 0 || (!rem && byte == 0))
@@ -35,7 +35,7 @@ char *get_next_line(int fd)
     while (rem[i] && rem[i] != '\n')
         i++;
 
-    line = malloc(i + 2);
+    line = ft_calloc(i + 2, 1);
     if (!line)
     {
         free(rem);
@@ -45,7 +45,7 @@ char *get_next_line(int fd)
     i = 0;
     while (rem[i] && rem[i] != '\n')
     {
-        line[i] = rem[i];double-free
+        line[i] = rem[i];
         i++;
     }
 
@@ -55,6 +55,7 @@ char *get_next_line(int fd)
         i++;
     }
     line[i] = '\0';
+
 
     tmp = ft_strdup(rem + i);
     free(rem);

@@ -46,6 +46,27 @@ void	*ft_calloc(size_t num, size_t size)
 	return (ptr);
 }
 
+// char	*ft_strjoin(char *s1, char *s2)
+// {
+// 	char	*concate;
+// 	size_t	len_s1;
+// 	size_t	len_s2;
+
+// 	len_s1 = 0;
+// 	len_s2 = 0;
+// 	if (!s1)
+// 		len_s1 = ft_strlen(s1);
+// 	if (!s2)
+// 		len_s2 = ft_strlen(s2);
+// 	concate = ft_calloc((len_s1 + len_s2 + 1), sizeof(char));
+// 	if (concate == NULL)
+// 		return (NULL);
+// 	ft_memcpy(concate, s1, len_s1);
+// 	ft_memcpy(concate + len_s1, s2, len_s2);
+// 	free(s1);
+// 	return (concate);
+// }
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*concate;
@@ -69,7 +90,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (concate);
 }
 
-
 char	*ft_strdup(const char *s1)
 {
 	size_t	len;
@@ -89,8 +109,11 @@ size_t	ft_strlen(const char *s)
 	size_t	i;
 
 	i = 0;
-	while (s[i])
-		i++;
+	if (s != NULL)
+	{
+		while (s[i])
+			i++;
+	}
 	return (i);
 }
 
