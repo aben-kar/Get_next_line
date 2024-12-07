@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:36:02 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/06 15:36:03 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/07 21:27:12 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,26 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	}
 	return (dst);
 }
-void	ft_bzero(void *s, size_t n)
+
+void	*ft_calloc(size_t count, size_t size)
 {
-	unsigned char	*p;
+	unsigned char	*s;
 	size_t			i;
 
-	p = (unsigned char *)s;
 	i = 0;
-	while (i < n)
+	if (size != 0 && (count > SIZE_MAX / size))
+		return (NULL);
+	s = (unsigned char *)malloc(count * size);
+	if (s == NULL)
+		return (NULL);
+	while (i < count * size)
 	{
-		p[i] = 0;
+		s[i] = 0;
 		i++;
 	}
+	return (s);
 }
-void	*ft_calloc(size_t num, size_t size)
-{
-	size_t	total_size;
-	void	*ptr;
 
-	if (num != 0 && (18446744073709551615UL / num < size))
-		return (NULL);
-	total_size = num * size;
-	ptr = malloc(total_size);
-	if (!ptr)
-		return (NULL);
-	ft_bzero(ptr, total_size);
-	return (ptr);
-}
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*concate;
@@ -67,13 +60,11 @@ char	*ft_strjoin(char *s1, char *s2)
 		s1 = ft_calloc(1, sizeof(char));
 	if (!s2)
 		s2 = ft_calloc(1, sizeof(char));
-
 	len_s1 = ft_strlen(s1);
 	len_s2 = ft_strlen(s2);
 	concate = (char *)ft_calloc((len_s1 + len_s2 + 1), sizeof(char));
 	if (concate == NULL)
 		return (NULL);
-
 	ft_memcpy(concate, s1, len_s1);
 	ft_memcpy(concate + len_s1, s2, len_s2);
 	free(s1);
@@ -94,15 +85,13 @@ char	*ft_strdup(const char *s1)
 	ft_memcpy(ptr, s1, len);
 	return (ptr);
 }
+
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	if (s != NULL)
-	{
-		while (s[i])
-			i++;
-	}
+	while (s[i])
+		i++;
 	return (i);
 }
