@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:47:41 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/09 17:04:56 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/09 22:58:41 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdint.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
 char	*ft_strjoin(char *s1, char *s2);

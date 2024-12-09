@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:36:07 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/09 17:05:32 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/09 23:06:01 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	*read_and_store(int fd, char *rem, char *buffer)
 {
 	ssize_t	byte;
-	char	*tmp;
 	int		i;
 
 	i = 0;
@@ -23,13 +22,9 @@ char	*read_and_store(int fd, char *rem, char *buffer)
 	while (byte > 0)
 	{
 		buffer[byte] = '\0';
-		tmp = ft_strjoin(rem, buffer);
-		if (!tmp)
-		{
-			free(rem);
+		rem = ft_strjoin(rem, buffer);
+		if (!rem)
 			return (NULL);
-		}
-		rem = tmp;
 		if (rem[i] && rem[i] == '\n')
 			break ;
 		byte = read(fd, buffer, BUFFER_SIZE);
@@ -45,7 +40,7 @@ char	*add_line(char *rem)
 	char	*line;
 
 	i = 0;
-	if (!rem || !*rem)
+	if (!rem)
 		return (NULL);
 	while (rem[i] && rem[i] != '\n')
 		i++;
@@ -61,7 +56,7 @@ char	*add_line(char *rem)
 		i++;
 	}
 	if (rem[i] == '\n')
-		line[i++] = '\n';
+		line[i] = '\n';
 	return (line);
 }
 
@@ -73,12 +68,19 @@ char	*update_rem(char *rem)
 	i = 0;
 	while (rem[i] && rem[i] != '\n')
 		i++;
+	if (rem[i] == '\n')
+		i++;
 	if (!rem[i])
 	{
 		free(rem);
 		return (NULL);
 	}
-	new_rem = ft_strdup(rem + i + 1);
+	new_rem = ft_strdup(rem + i);
+	if (!new_rem)
+	{
+		free(rem);
+		return (NULL);
+	}
 	free(rem);
 	return (new_rem);
 }
@@ -108,17 +110,26 @@ char	*get_next_line(int fd)
 
 // int main()
 // {
-//     int fd;
-//     char *line;
+//     // int fd;
+//     // char *line;
 
-//     fd = open("test.txt", O_CREAT | O_RDWR, 0644);
-//     while (1) {
-//         line = get_next_line(fd);
-//         if (!line)
-//             break;
-//         printf("%s", line);
-//         free(line);
-//     }
-//     // printf("%s", get_next_line(fd));
-//     close(fd);
+//     // fd = open("test.txt", O_CREAT | O_RDWR, 0644);
+// 	// line = get_next_line(fd);
+//     // printf("%s",line);
+// 	// free(line);
+// 	// // printf("%s", line);
+//     // // while (1) {
+//     // //     line = get_next_line(fd);
+//     // //     if (!line)
+//     // //         break;
+//     // //     printf("%s", line);
+//     // //     free(line);
+//     // // }
+//     // close(fd);
+
+// 	char *line;
+// 	int fd = open("test.txt", O_CREAT | O_RDWR, 0644);
+// 	line = get_next_line(fd);
+//     printf("%s",line);
+// 	free(line);
 // }
