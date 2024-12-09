@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:36:07 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/07 22:01:52 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/09 16:15:51 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ char	*add_line(char *rem)
 		return (NULL);
 	while (rem[i] && rem[i] != '\n')
 		i++;
-	line = ft_calloc(i + 2, 1);
+	if (rem[i] == '\n')
+		i++;
+	line = ft_calloc(i + 1, 1);
 	if (!line)
 		return (NULL);
 	i = 0;
@@ -60,7 +62,6 @@ char	*add_line(char *rem)
 	}
 	if (rem[i] == '\n')
 		line[i++] = '\n';
-	line[i] = '\0';
 	return (line);
 }
 
@@ -105,19 +106,19 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int main()
-// {
-//     int fd;
-//     char *line;
+int main()
+{
+    int fd;
+    char *line;
 
-//     fd = open("test.txt", O_CREAT | O_RDWR, 0644);
-//     while (1) {
-//         line = get_next_line(fd);
-//         if (!line)
-//             break;
-//         printf("%s", line);
-//         free(line);
-//     }
-//     // printf("%s", get_next_line(fd));
-//     close(fd);
-// }
+    fd = open("test.txt", O_CREAT | O_RDWR, 0644);
+    while (1) {
+        line = get_next_line(fd);
+        if (!line)
+            break;
+        printf("%s", line);
+        free(line);
+    }
+    // printf("%s", get_next_line(fd));
+    close(fd);
+}
