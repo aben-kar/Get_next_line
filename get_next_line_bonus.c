@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:48:50 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/09 23:31:34 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:45:06 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,47 +107,3 @@ char	*get_next_line(int fd)
 	rem[fd] = update_rem(rem[fd]);
 	return (line);
 }
-
-// int main()
-// {
-//     // int fd;
-    // char *line;
-
-    // fd = open("test.txt", O_CREAT | O_RDWR, 0644);
-    // int fd2 = open("test2.txt", O_RDWR | O_CREAT, 0644);
-    // int fd3 = open("test3.txt", O_RDWR | O_CREAT, 0644);
-    // line = get_next_line(fd);
-    // char *line2 = get_next_line(fd2);
-    // char *line3 = get_next_line(fd3);
-	// while (line || line2 || line3)
-	// {
-	// 	printf("%s", line);
-    //     printf("%s", line2);
-    //     printf("%s", line3);
-	// 	free(line);
-	// 	free(line2);
-	// 	free(line3);
-	// 	line = get_next_line(fd);
-    //     line2 = get_next_line(fd2);
-    //     line3 = get_next_line(fd3);
-	// }
-	
-	// char *line;
-	// int fd = open("test.txt", O_CREAT | O_RDWR, 0644);
-	// line = get_next_line(fd);
-    // printf("%s",line);
-	// free(line);
-	
-// 	// char *line1;
-// 	// int fd1 = open("test2.txt", O_CREAT | O_RDWR, 0644);
-// 	// line1 = get_next_line(fd1);
-//     // printf("%s",line1);
-// 	// free(line1);
-
-// 	// char *line2;
-// 	// int fd2 = open("test3.txt", O_CREAT | O_RDWR, 0644);
-// 	// line2 = get_next_line(fd2);
-//     // printf("%s",line2);
-// 	// free(line2);
-	
-// }

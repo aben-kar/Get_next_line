@@ -6,7 +6,7 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:36:07 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/09 23:06:01 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/10 12:44:57 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,29 +107,3 @@ char	*get_next_line(int fd)
 	rem = update_rem(rem);
 	return (line);
 }
-
-// int main()
-// {
-//     // int fd;
-//     // char *line;
-
-//     // fd = open("test.txt", O_CREAT | O_RDWR, 0644);
-// 	// line = get_next_line(fd);
-//     // printf("%s",line);
-// 	// free(line);
-// 	// // printf("%s", line);
-//     // // while (1) {
-//     // //     line = get_next_line(fd);
-//     // //     if (!line)
-//     // //         break;
-//     // //     printf("%s", line);
-//     // //     free(line);
-//     // // }
-//     // close(fd);
-
-// 	char *line;
-// 	int fd = open("test.txt", O_CREAT | O_RDWR, 0644);
-// 	line = get_next_line(fd);
-//     printf("%s",line);
-// 	free(line);
-// }
