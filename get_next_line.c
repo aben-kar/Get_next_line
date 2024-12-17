@@ -6,11 +6,26 @@
 /*   By: acben-ka <acben-ka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 15:36:07 by acben-ka          #+#    #+#             */
-/*   Updated: 2024/12/10 12:44:57 by acben-ka         ###   ########.fr       */
+/*   Updated: 2024/12/17 17:06:18 by acben-ka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *str, int c)
+{
+	if (!str)
+		return (NULL);
+	while (*str)
+	{
+		if ((char)c == *str)
+			return ((char *)str);
+		str++;
+	}
+	if ((char)c == '\0')
+		return ((char *)str);
+	return (NULL);
+}
 
 char	*read_and_store(int fd, char *rem, char *buffer)
 {
@@ -18,16 +33,14 @@ char	*read_and_store(int fd, char *rem, char *buffer)
 	int		i;
 
 	i = 0;
-	byte = read(fd, buffer, BUFFER_SIZE);
-	while (byte > 0)
+	byte = 1;
+	while (byte > 0 && !ft_strchr(buffer, '\n'))
 	{
+		byte = read(fd, buffer, BUFFER_SIZE);
 		buffer[byte] = '\0';
 		rem = ft_strjoin(rem, buffer);
 		if (!rem)
 			return (NULL);
-		if (rem[i] && rem[i] == '\n')
-			break ;
-		byte = read(fd, buffer, BUFFER_SIZE);
 	}
 	if (byte < 0 || (!rem && byte == 0))
 		return (NULL);
